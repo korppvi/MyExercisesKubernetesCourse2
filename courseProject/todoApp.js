@@ -4,8 +4,8 @@ const http = require('http');
 const portEnv = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('some response'); 
+  res.setHeader('Content-Type', 'text/html');
+  res.end(`<h1>Hello, World</h1>`);
 });
 
 server.listen(portEnv, () => {
