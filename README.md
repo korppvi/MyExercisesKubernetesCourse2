@@ -4,7 +4,7 @@
 
 ### Chapter 2
 
-- [1.1.](https://github.com/korppvi/MyExercisesKubernetesCourse/tree/v1.1/logOutput)
+- [1.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.1/logOutput)
 
 ### Chapter 3
 
