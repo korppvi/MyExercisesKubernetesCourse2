@@ -10,6 +10,7 @@
 - [1.4.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.4/courseProject)
 - [1.5.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.5/courseProject)
 - [1.6.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.6/courseProject)
+- [1.7.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.7/logOutput)
 ### Chapter 3
 
 ### Chapter 4
