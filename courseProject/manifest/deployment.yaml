@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: todoapp
-          image: vilkorppi/todoapp:v1.5
+          image: vilkorppi/todoapp:v1.6
