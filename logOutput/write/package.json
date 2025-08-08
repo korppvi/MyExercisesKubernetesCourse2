@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "uuid": "^11.1.0"
+  },
+  "scripts": {
+    "start": "node LogOutputWrite.js"
+  }
+}

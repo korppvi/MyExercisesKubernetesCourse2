@@ -1,16 +1,12 @@
 const http = require('http');
-const { v4: uuidv4 } = require('uuid');
-
-const randomlyGeneratedString = uuidv4();
+const fs = require('fs');
+const path = require('path');
 const port = process.env.PORT || 3000;
-
-setInterval(() => {
-    console.log(`${new Date().toISOString()}: ${randomlyGeneratedString}`);
-}, 5000);
+const randomStringPath = path.join(__dirname, 'random', 'string.txt');
 
 const server = http.createServer((req, res) => {
     res.setHeader('Content-Type', 'text/plain');
-    res.end(randomlyGeneratedString);
+    res.end(fs.readFileSync(randomStringPath));
 });
 
 server.listen(port, () => {

@@ -3,6 +3,6 @@
     "uuid": "^11.1.0"
   },
   "scripts": {
-    "start": "node LogOutput.js"
+    "start": "node LogOutputRead.js"
   }
 }

@@ -12,6 +12,19 @@ spec:
       labels:
         app: logoutput
     spec:
+      volumes:
+        - name: random-string
+          emptyDir: {}
       containers:
-        - name: logoutput
-          image: vilkorppi/logoutput:v1.7
+        - name: write
+          image: vilkorppi/logoutput:write
+          volumeMounts:
+            - name: random-string
+              mountPath: /usr/src/app/random
+        - name: read
+          image: vilkorppi/logoutput:read
+          volumeMounts:
+            - name: random-string
+              mountPath: /usr/src/app/random
+          ports:
+            - containerPort: 3000
