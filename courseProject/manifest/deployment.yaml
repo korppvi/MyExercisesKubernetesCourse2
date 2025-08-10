@@ -12,6 +12,13 @@ spec:
       labels:
         app: todoapp
     spec:
+      volumes:
+        - name: imagesvolume
+          persistentVolumeClaim:
+            claimName: imagesclaim
       containers:
         - name: todoapp
-          image: vilkorppi/todoapp:v1.8
+          image: vilkorppi/todoapp:v1.12
+          volumeMounts:
+          - name: imagesvolume
+            mountPath: /usr/src/app/images
