@@ -13,6 +13,9 @@ spec:
         app: logoutput
     spec:
       volumes:
+        - name: pongsvolume
+          persistentVolumeClaim:
+            claimName: pongclaim
         - name: random-string
           emptyDir: {}
       containers:
@@ -22,9 +25,11 @@ spec:
             - name: random-string
               mountPath: /usr/src/app/random
         - name: read
-          image: vilkorppi/logoutput:read
+          image: vilkorppi/logoutput:read_v1.11
           volumeMounts:
             - name: random-string
               mountPath: /usr/src/app/random
+            - name: pongsvolume
+              mountPath: /usr/src/app/pongs
           ports:
             - containerPort: 3000
