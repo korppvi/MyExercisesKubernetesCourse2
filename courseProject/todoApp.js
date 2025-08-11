@@ -46,7 +46,9 @@ function runJob() {
 }
 
 const server = http.createServer(async (req, res) => {
-  if (req.url === '/') {
+
+	
+  if (req.url === '/image') {
 	  if (fetch) {
 		  
 			console.log('Fetch was true');
@@ -89,7 +91,32 @@ const server = http.createServer(async (req, res) => {
 	  res.writeHead(200, { 'Content-Type': 'image/jpeg' });
 	  res.end(data);
   
-  } else {
+  } 
+  else if(req.url === '/') {
+	res.writeHead(200, { 'Content-Type': 'text/html' });
+	res.end(`<html>
+<body>
+  <h1>Todo</h1>
+
+  <img src="/image"  width="150">
+
+  <br><br>
+  <input type="text" id="todo" maxlength="140">
+  <button>Send</button>
+
+  <h2>Todos</h2>
+  <ul>
+    <li>todo1</li>
+    <li>todo2</li>
+    <li>todo3</li>
+  </ul>
+
+</body>
+</html>
+`);
+	return;
+  }
+  else {
     res.end('<h1>Invalid path</h1>');
 	return;
   }

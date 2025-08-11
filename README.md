@@ -16,6 +16,7 @@
 - [1.10.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.10/logOutput)
 - [1.11.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.11/pingPong)
 - [1.12.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.12/courseProject)
+- [1.13.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.13/courseProject)
 ### Chapter 3
 
 ### Chapter 4

@@ -18,7 +18,7 @@ spec:
             claimName: imagesclaim
       containers:
         - name: todoapp
-          image: vilkorppi/todoapp:v1.12
+          image: vilkorppi/todoapp:v1.13
           volumeMounts:
           - name: imagesvolume
             mountPath: /usr/src/app/images
