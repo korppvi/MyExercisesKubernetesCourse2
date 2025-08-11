@@ -17,8 +17,10 @@
 - [1.11.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.11/pingPong)
 - [1.12.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.12/courseProject)
 - [1.13.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v1.13/courseProject)
-- [2.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.1/pingPong)
+
 ### Chapter 3
+
+- [2.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.1/pingPong)
 
 ### Chapter 4
 
