@@ -12,13 +12,6 @@ spec:
       labels:
         app: pingpong
     spec:
-      volumes:
-        - name: pongsvolume
-          persistentVolumeClaim:
-            claimName: pongclaim
       containers:
         - name: pingpong
-          image: vilkorppi/pingpong:v1.11
-          volumeMounts:
-          - name: pongsvolume
-            mountPath: /usr/src/app/pongs
+          image: vilkorppi/pingpong:v2.1

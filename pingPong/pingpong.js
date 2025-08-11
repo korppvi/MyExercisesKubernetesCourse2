@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 
 const port = process.env.PORT || 3000;
-const pongsPath = path.join(__dirname, 'pongs', 'pongs.txt');
 let pongs = 0;
 
 const server = http.createServer((req, res) => {
@@ -11,12 +10,14 @@ const server = http.createServer((req, res) => {
 
   if (req.url === '/pingpong') {
 	pongs= pongs + 1
-	fs.writeFileSync(pongsPath,`Ping / Pongs:  ${pongs}`)
-  } else {
+	res.end('success');
+  }
+  else if (req.url === '/count') {
+	res.end(`Ping / Pongs:  ${pongs}`);
+  }
+  else {
 	res.end('<h1>Invalid path</h1>');
   }
-
-  res.end('success');
 });
 
 server.listen(port, () => {

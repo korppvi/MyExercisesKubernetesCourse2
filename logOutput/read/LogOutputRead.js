@@ -1,16 +1,27 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 const port = process.env.PORT || 3001;
 
 const randomStringPath = path.join(__dirname, 'random', 'string.txt');
-const pongsPath = path.join(__dirname, 'pongs', 'pongs.txt');
 
 let randomlyGeneratedString = '';
 let pongs = '';
+const pongUrl = 'http://pingpong-svc:456/count';
 
-const server = http.createServer((req, res) => {
+async function fetchPongs(url) {
+  try {
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    return response.data;
+  } catch (err) {
+    console.error('Fetching count failed', err);
+    return null;
+  }
+}
+
+const server = http.createServer(async (req, res) => {
 
 	try {
 	  randomlyGeneratedString = fs.readFileSync(randomStringPath, 'utf8');
@@ -19,7 +30,7 @@ const server = http.createServer((req, res) => {
 	}
 
   try {
-	pongs = fs.readFileSync(pongsPath, 'utf8');
+	pongs = await fetchPongs(pongUrl);
   } catch {
 	pongs = '[No pongs count found]';
   }	
