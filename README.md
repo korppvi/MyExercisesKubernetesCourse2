@@ -21,6 +21,7 @@
 ### Chapter 3
 
 - [2.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.1/pingPong)
+- [2.2.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.2/courseProject)
 
 ### Chapter 4
 

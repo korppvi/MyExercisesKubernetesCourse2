@@ -1,0 +1,50 @@
+<html>
+<body>
+  <h1>Todo</h1>
+
+  <img src="/image" width="150">
+
+  <br><br>
+  <input id="todo" maxlength="140" >
+  <button id="send">Send</button>
+
+  <h2>Todos</h2>
+  <ul id="list">
+  </ul>
+
+  <script>
+    const list = document.getElementById('list');
+    const input = document.getElementById('todo');
+    const send = document.getElementById('send');
+
+    function updateList(items) {
+      list.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+    }
+
+    function fetchTodos() {
+      fetch('/todos')
+        .then(r => r.json())
+        .then(updateList)
+    }
+
+    send.onclick = () => {
+		
+      const todo = input.value.trim();
+		
+		if (todo)
+		{
+		  fetch('/add', {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({ todo })
+		  })
+		  .then(r => r.json())
+		  .then(updateList)
+		  input.value = '';
+		}
+    };
+
+    fetchTodos();
+  </script>
+</body>
+</html>

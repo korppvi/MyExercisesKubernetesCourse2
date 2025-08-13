@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node todoApp.js"
+    "start": "node todoAppBackEnd.js"
   },
   "dependencies": {
     "axios": "^1.11.0",

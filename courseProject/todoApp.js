@@ -2,14 +2,23 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const express = require('express');
+
+const todoApp = express();
 const port = process.env.PORT || 3000;
+
+const pagePath = path.join(__dirname, 'standalone.html');
 const picturePath = path.join(__dirname,'images','random.jpg');
+
 const imageUrl = 'https://picsum.photos/1200';
+const backEndTodo = 'http://todoappback-svc:5678'
 
 let fetch = !(fs.existsSync(picturePath));
 let cache = null;
 let data = null;
 let timeoutId;
+
+todoApp.use(express.json());
 
 if(!fetch) {
 	console.log('Startup: Picture already exists. Set timeout for picture change');
@@ -28,9 +37,20 @@ async function fetchImageFromExternalSource(url) {
   }
 }
 
-function readFromFile() {
+async function addTodo(value) {
+
+	const response = await axios.post(
+      backEndTodo+'/add',
+      { todo: value },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+    console.log('Todo added');
+	return response.data; 
+}
+
+function readFromFile(path) {
   try {
-    return fs.readFileSync(picturePath);
+    return fs.readFileSync(path);
   } catch (err) {
     console.error('Reading picture failed', err);
     return null;
@@ -45,84 +65,57 @@ function runJob() {
   }, 10 * 60 * 1000);
 }
 
-const server = http.createServer(async (req, res) => {
+todoApp.get('/', (req, res) => {
+   let data = readFromFile(pagePath);
+   res.type('html').send(data); 
+});
 
+todoApp.get('/image', async (req, res) => {
 	
-  if (req.url === '/image') {
-	  if (fetch) {
+	if (fetch) {
 		  
-			console.log('Fetch was true');
+		console.log('Fetch was true');
 			  
-			if (cache) {
+		if (cache) {
 			
-				  console.log('Reading image from cache. Fetching not done');
-				  
-				  data = cache;
-				  cache = null;
-			} else {
+			console.log('Reading image from cache. Fetching not done');
+			data = cache;
+			cache = null;
+			
+		} else {
 				
-				  console.log('Cache was empty. Fetching image from external source');
-				  
-				  data = await fetchImageFromExternalSource(imageUrl);
-				  runJob();
-				  fetch = false;
-			}
+			console.log('Cache was empty. Fetching image from external source');
+			data = await fetchImageFromExternalSource(imageUrl);
+			runJob();
+			fetch = false;
+		}
 	  } else {
 		if (cache) {
 		
 		  console.log('Reading image from cache. no file read from volume');
-			
 		  data = cache;
+		  
 		} else {
 		
 		  console.log('Cache was empty. Reading file from volume');
-		  
-		  cache = readFromFile();
+		  cache = readFromFile(picturePath);
 		  data = cache;
 		}
 	  }
-
-	  if (!data) {
-		res.writeHead(500, { 'Content-Type': 'text/plain' });
-		res.end('Error loading image');
-		return;
-	  }
-
-	  res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-	  res.end(data);
-  
-  } 
-  else if(req.url === '/') {
-	res.writeHead(200, { 'Content-Type': 'text/html' });
-	res.end(`<html>
-<body>
-  <h1>Todo</h1>
-
-  <img src="/image"  width="150">
-
-  <br><br>
-  <input type="text" id="todo" maxlength="140">
-  <button>Send</button>
-
-  <h2>Todos</h2>
-  <ul>
-    <li>todo1</li>
-    <li>todo2</li>
-    <li>todo3</li>
-  </ul>
-
-</body>
-</html>
-`);
-	return;
-  }
-  else {
-    res.end('<h1>Invalid path</h1>');
-	return;
-  }
-  
+	res.type('jpeg');
+	res.send(data);
 });
 
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+todoApp.post('/add', async (req, res) => {
+  data = await addTodo(req.body.todo)
+  res.json(data);
+});
+
+todoApp.get('/todos', async (req, res) => {
+  const response = await axios.get(backEndTodo+'/todos');
+  res.json(response.data);
+});
+
+todoApp.listen(port, () => {
+  console.log(`Server running at ${port}`);
 });
