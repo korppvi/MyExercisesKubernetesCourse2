@@ -4,8 +4,10 @@ const path = require('path');
 const axios = require('axios');
 
 const port = process.env.PORT || 3001;
+const message = process.env.MESSAGE;
 
 const randomStringPath = path.join(__dirname, 'random', 'string.txt');
+const informationPath = path.join(__dirname, 'mappings', 'information.txt');
 
 let randomlyGeneratedString = '';
 let pongs = '';
@@ -25,6 +27,7 @@ const server = http.createServer(async (req, res) => {
 
 	try {
 	  randomlyGeneratedString = fs.readFileSync(randomStringPath, 'utf8');
+	  information = fs.readFileSync(informationPath, 'utf8');
 	} catch {
 	  randomlyGeneratedString = '[No random string found]';
 	}
@@ -36,7 +39,7 @@ const server = http.createServer(async (req, res) => {
   }	
   
   res.setHeader('Content-Type', 'text/html');
-  res.end(`${randomlyGeneratedString}<br>${pongs}`);
+  res.end(`file content: ${information}<br>env variable: MESSAGE=${message}<br>${randomlyGeneratedString}<br>${pongs}`);
 });
 
 server.listen(port, () => {

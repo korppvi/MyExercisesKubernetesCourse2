@@ -16,6 +16,9 @@ spec:
       volumes:
         - name: random-string
           emptyDir: {}
+        - name: volume-from-config
+          configMap:
+            name: config-for-file
       containers:
         - name: write
           image: vilkorppi/logoutput:write
@@ -23,9 +26,17 @@ spec:
             - name: random-string
               mountPath: /usr/src/app/random
         - name: read
-          image: vilkorppi/logoutput:read_v2.1
+          image: vilkorppi/logoutput:read_v2.5
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: someValue
           volumeMounts:
             - name: random-string
               mountPath: /usr/src/app/random
+            - name: volume-from-config
+              mountPath: /usr/src/app/mappings
           ports:
             - containerPort: 3000
