@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-for-env
+  namespace: project
+data:
+  image: https://picsum.photos/1200
+  backend: http://todoappback-svc:5678
+  page: standalone.html
+  picture: random.jpg
+  port: "3000"

@@ -19,7 +19,33 @@ spec:
             claimName: imagesclaim
       containers:
         - name: todoapp
-          image: vilkorppi/todoapp:v2.2
+          image: vilkorppi/todoapp:v2.6
+          env:
+            - name: IMAGE
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: image
+            - name: BACKEND
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: backend
+            - name: PAGE
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: page
+            - name: PICTURE
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: picture
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env
+                    key: port
           volumeMounts:
           - name: imagesvolume
             mountPath: /usr/src/app/images

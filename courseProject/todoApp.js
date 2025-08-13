@@ -5,13 +5,13 @@ const axios = require('axios');
 const express = require('express');
 
 const todoApp = express();
-const port = process.env.PORT || 3000;
 
-const pagePath = path.join(__dirname, 'standalone.html');
-const picturePath = path.join(__dirname,'images','random.jpg');
+const port = parseInt(process.env.PORT, 10);
+const pagePath = path.join(__dirname, process.env.PAGE);
+const picturePath = path.join(__dirname,'images',process.env.PICTURE);
 
-const imageUrl = 'https://picsum.photos/1200';
-const backEndTodo = 'http://todoappback-svc:5678'
+const imageUrl = process.env.IMAGE;
+const backEndTodo = process.env.BACKEND
 
 let fetch = !(fs.existsSync(picturePath));
 let cache = null;

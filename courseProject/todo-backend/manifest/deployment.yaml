@@ -15,4 +15,10 @@ spec:
     spec:
       containers:
         - name: todoappback
-          image: vilkorppi/todoappback:v2.2
+          image: vilkorppi/todoappback:v2.6
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-env-back
+                    key: port

@@ -4,6 +4,10 @@ Deploy this using:
 
 kubectl create namespace project
 
+kubectl apply -f courseProject/configmap.yaml
+
+kubectl apply -f courseProject/todo-backend/configmap.yaml
+
 kubectl apply -f courseProject/todo-backend/manifest
 
 docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/images

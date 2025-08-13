@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-for-env-back
+  namespace: project
+data:
+  port: "3001"
