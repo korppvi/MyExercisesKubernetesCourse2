@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-db
+  namespace: exercises
+spec:
+  serviceName: todo-db-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-db
+  template:
+    metadata:
+      labels:
+        app: todo-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+              name: postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: userPgsql
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: passwordPgsql
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: dbPgsql
+          volumeMounts:
+            - name: todo-data
+              mountPath: /var/lib/postgresql/data
+            - name: init-todos-sql-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: init-todos-sql-script
+          configMap:
+            name: todo-db-configs
+  volumeClaimTemplates:
+    - metadata:
+        name: todo-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-db-configs
+  namespace: project
+data:
+  initialize.sql: |
+    CREATE TABLE todos (todo VARCHAR(50));
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-db-configs-env
+  namespace: project
+data:
+  userPgsql: postgres
+  passwordPgsql: postgres
+  dbPgsql: todo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config-env
+  namespace: project
+data:
+  image: https://picsum.photos/1200
+  backend: http://todoappback-svc:5678
+  page: standalone.html
+  picture: random.jpg
+  port: "3000"

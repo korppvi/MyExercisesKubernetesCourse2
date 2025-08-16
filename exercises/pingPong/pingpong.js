@@ -3,15 +3,15 @@ const fs = require('fs');
 const path = require('path');
 const { Pool } = require('pg');
 
-const port = process.env.PORT || 3000;
+const serverport = parseInt(process.env.port, 10);
 let pongs = 0;
 
 const pool = new Pool({
-  host: 'pingpong-database-service',
-  port: 5432,
-  user: 'postgres',
-  password: 'postgres', 
-  database: 'pingpong',
+  host: process.env.dbhost,
+  port: parseInt(process.env.dbport, 10),
+  user: process.env.dbusername,
+  password: process.env.dbpassword, 
+  database: process.env.dbname,
 });
 
 const server = http.createServer(async (req, res) => {
@@ -40,6 +40,6 @@ const server = http.createServer(async (req, res) => {
   
 });
 
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+server.listen(serverport, () => {
+  console.log(`Server running on port ${serverport}`);
 });

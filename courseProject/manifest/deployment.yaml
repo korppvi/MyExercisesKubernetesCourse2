@@ -24,27 +24,27 @@ spec:
             - name: IMAGE
               valueFrom:
                 configMapKeyRef:
-                    name: config-for-env
+                    name: app-config-env
                     key: image
             - name: BACKEND
               valueFrom:
                 configMapKeyRef:
-                    name: config-for-env
+                    name: app-config-env
                     key: backend
             - name: PAGE
               valueFrom:
                 configMapKeyRef:
-                    name: config-for-env
+                    name: app-config-env
                     key: page
             - name: PICTURE
               valueFrom:
                 configMapKeyRef:
-                    name: config-for-env
+                    name: app-config-env
                     key: picture
             - name: PORT
               valueFrom:
                 configMapKeyRef:
-                    name: config-for-env
+                    name: app-config-env
                     key: port
           volumeMounts:
           - name: imagesvolume

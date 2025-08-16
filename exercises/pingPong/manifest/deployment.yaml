@@ -16,3 +16,34 @@ spec:
       containers:
         - name: pingpong
           image: vilkorppi/pingpong:v2.7
+          env:
+            - name: dbhost
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: hostPgsql
+            - name: dbport
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: portPgsql
+            - name: dbname
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: dbPgsql
+            - name: dbusername
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: userPgsql
+            - name: dbpassword
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: passwordPgsql
+            - name: port
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-app-env
+                    key: applicationport
