@@ -27,6 +27,7 @@
 - [2.5.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.5/exercises/logOutput)
 - [2.6.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.6/courseProject)
 - [2.7.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.7/exercises/pingPong)
+- [2.8.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.8/courseProject)
 
 ### Chapter 4
 

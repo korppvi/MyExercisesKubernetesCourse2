@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-for-env-back
+  namespace: project
+data:
+  port: "3001"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-db-configs
+  namespace: project
+data:
+  initialize.sql: |
+    CREATE TABLE todos (todo VARCHAR(50));
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-db-configs-env
+  namespace: project
+data:
+  hostPgsql: todo-db-service
+  portPgsql: "5432"
+  userPgsql: postgres
+  passwordPgsql: postgres
+  dbPgsql: todo

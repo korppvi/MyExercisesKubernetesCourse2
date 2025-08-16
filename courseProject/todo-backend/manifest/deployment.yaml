@@ -15,10 +15,35 @@ spec:
     spec:
       containers:
         - name: todoappback
-          image: vilkorppi/todoappback:v2.6
+          image: vilkorppi/todoappback:v2.8
           env:
             - name: PORT
               valueFrom:
                 configMapKeyRef:
                     name: config-for-env-back
                     key: port
+            - name: dbhost
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: hostPgsql
+            - name: dbport
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: portPgsql
+            - name: dbusername
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: userPgsql
+            - name: dbpassword
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: passwordPgsql
+            - name: dbname
+              valueFrom:
+                configMapKeyRef:
+                    name: todo-db-configs-env
+                    key: dbPgsql
