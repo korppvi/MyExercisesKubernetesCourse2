@@ -29,6 +29,7 @@
 - [2.7.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.7/exercises/pingPong)
 - [2.8.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.8/courseProject)
 - [2.9.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.9/courseProject)
+- [2.10.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v2.10/courseProject)
 
 ### Chapter 4
 

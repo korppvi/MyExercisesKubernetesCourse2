@@ -24,10 +24,20 @@ todoBackend.get('/todos',async (req, res) => {
 
 todoBackend.post('/add',async (req, res) => {
   
-  await pool.query("INSERT INTO TODOS (TODO) VALUES ($1)", [req.body.todo]);
+	let newtodo = req.body.todo
+	let todos = '[]'
   
-  const queryResult = await pool.query("SELECT TODO FROM TODOS");
-  const todos = queryResult.rows.map(row => row.todo);
+	if (newtodo.length <= 140) {
+		
+		await pool.query("INSERT INTO TODOS (TODO) VALUES ($1)", [newtodo]);
+		const queryResult = await pool.query("SELECT TODO FROM TODOS");
+		todos = queryResult.rows.map(row => row.todo);
+		
+		console.log('new todo added: '+newtodo)
+	}
+	else {
+		console.error('Todo is too long: '+newtodo)
+	}
   
   res.json(todos);
 });
