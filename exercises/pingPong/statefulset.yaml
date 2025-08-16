@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pingpong-database
+  namespace: exercises
+spec:
+  serviceName: pingpong-database-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong-database
+  template:
+    metadata:
+      labels:
+        app: pingpong-database
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+              name: postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: userPgsql
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: passwordPgsql
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                    name: config-for-database-env
+                    key: dbPgsql
+          volumeMounts:
+            - name: pongdb-data
+              mountPath: /var/lib/postgresql/data
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: init-script
+          configMap:
+            name: config-for-database
+  volumeClaimTemplates:
+    - metadata:
+        name: pongdb-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

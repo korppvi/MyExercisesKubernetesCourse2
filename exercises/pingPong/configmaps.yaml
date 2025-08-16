@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-for-database
+  namespace: exercises
+data:
+  initialize.sql: |
+    CREATE TABLE pongs (pong VARCHAR(50));
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-for-database-env
+  namespace: exercises
+data:
+  userPgsql: postgres
+  passwordPgsql: postgres
+  dbPgsql: pingpong
