@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: wikirandom
+  namespace: project
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: wikikontti
+            image: vilkorppi/jobtodo:v2.9
+            env:
+              - name: BACKEND
+                valueFrom:
+                  configMapKeyRef:
+                      name: app-config-env
+                      key: backend
+              - name: WIKI
+                valueFrom:
+                  configMapKeyRef:
+                      name: app-config-env
+                      key: wiki
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

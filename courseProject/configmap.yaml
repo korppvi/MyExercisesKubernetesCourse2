@@ -6,6 +6,7 @@ metadata:
 data:
   image: https://picsum.photos/1200
   backend: http://todoappback-svc:5678
+  wiki: https://en.wikipedia.org/wiki/Special:Random
   page: standalone.html
   picture: random.jpg
   port: "3000"
