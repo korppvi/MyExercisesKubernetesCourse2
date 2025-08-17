@@ -15,15 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: vilkorppi/pingpong:v4.1
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            timeoutSeconds: 3
-            failureThreshold: 3
-            httpGet:
-               path: /count
-               port: 3000
+          image: vilkorppi/pingpong:v2.7
           env:
             - name: dbhost
               valueFrom:

@@ -26,15 +26,7 @@ spec:
             - name: random-string
               mountPath: /usr/src/app/random
         - name: read
-          image: vilkorppi/logoutput:read_v4.1
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 90
-            timeoutSeconds: 3
-            failureThreshold: 3
-            httpGet:
-               path: /health
-               port: 3001
+          image: vilkorppi/logoutput:read_v2.5
           env:
             - name: MESSAGE
               valueFrom:
@@ -47,4 +39,4 @@ spec:
             - name: volume-from-config
               mountPath: /usr/src/app/mappings
           ports:
-            - containerPort: 3001
+            - containerPort: 3000
