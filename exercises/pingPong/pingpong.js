@@ -25,17 +25,23 @@ const server = http.createServer(async (req, res) => {
 	  }
 	  else if (req.url === '/count') {
 		  
-		const queryResult = await pool.query('SELECT COUNT(*) AS count FROM pongs');
-		let pongs = queryResult.rows[0].count;   
-		
-		res.setHeader('Content-Type', 'text/plain');
-		res.end(`Ping / Pongs:  ${pongs}`);
+		try {
+			const queryResult = await pool.query('SELECT COUNT(*) AS count FROM pongs');
+			let pongs = queryResult.rows[0].count;
+			res.setHeader('Content-Type', 'text/plain');
+			res.end(`Ping / Pongs:  ${pongs}`);
+		 } catch (error) {
+			res.statusCode = 500;
+			res.setHeader('Content-Type', 'text/plain');
+			res.end('Database query failed');
+		}
 	  }
 	  else {
 		res.setHeader('Content-Type', 'text/html');
 		res.end('<h1>Invalid path</h1>');
 	  }
   } catch (err) {
+	res.statusCode = 500;
     console.error(err.message);
     res.end('Database error');
   }
