@@ -39,4 +39,6 @@
 
 ### Chapter 5
 
+- [4.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v4.1/exercises/pingPong)
+
 ### Chapter 6
