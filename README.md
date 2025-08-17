@@ -35,6 +35,7 @@
 
 - [3.1.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v3.1/exercises/pingPong)
 - [3.2.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v3.2/exercises/pingPong)
+- [3.3.](https://github.com/korppvi/MyExercisesKubernetesCourse2/tree/v3.3/exercises/pingPong
 
 ### Chapter 5
 
