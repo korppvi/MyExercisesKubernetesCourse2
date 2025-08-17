@@ -112,8 +112,12 @@ todoApp.post('/add', async (req, res) => {
 });
 
 todoApp.get('/todos', async (req, res) => {
-  const response = await axios.get(backEndTodo+'/todos');
-  res.json(response.data);
+  try {
+	const response = await axios.get(backEndTodo+'/todos');
+	res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ failure: 'database error' });
+  }
 });
 
 todoApp.listen(port, () => {

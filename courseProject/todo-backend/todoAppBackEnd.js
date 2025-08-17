@@ -14,13 +14,16 @@ const pool = new Pool({
 
 todoBackend.use(express.json());
 
-todoBackend.get('/todos',async (req, res) => {
-	
-	const queryResult = await pool.query('SELECT TODO FROM TODOS');
-	let todos = queryResult.rows.map(row => row.todo);
-	
-  res.json(todos);
+todoBackend.get('/todos', async (req, res) => {
+  try {
+    const queryResult = await pool.query('SELECT TODO FROM TODOS');
+    const todos = queryResult.rows.map(row => row.todo);
+    res.json(todos);
+  } catch (error) {
+    res.status(500).json({ failure: 'database error' });
+  }
 });
+
 
 todoBackend.post('/add',async (req, res) => {
   

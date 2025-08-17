@@ -19,7 +19,15 @@ spec:
             claimName: imagesclaim
       containers:
         - name: todoapp
-          image: vilkorppi/todoapp:v2.6
+          image: vilkorppi/todoapp:v4.2
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            httpGet:
+               path: /todos
+               port: 3000
           env:
             - name: IMAGE
               valueFrom:

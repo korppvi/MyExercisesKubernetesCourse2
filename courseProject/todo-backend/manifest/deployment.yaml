@@ -15,7 +15,15 @@ spec:
     spec:
       containers:
         - name: todoappback
-          image: vilkorppi/todoappback:v2.10
+          image: vilkorppi/todoappback:v4.2
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 3
+            httpGet:
+               path: /todos
+               port: 3001
           env:
             - name: PORT
               valueFrom:
