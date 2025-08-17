@@ -14,16 +14,30 @@ let pongs = '';
 const pongUrl = 'http://pingpong-svc:456/count';
 
 async function fetchPongs(url) {
-  try {
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
-    return response.data;
-  } catch (err) {
-    console.error('Fetching count failed', err);
-    return null;
-  }
+
+   const response = await axios.get(url, { responseType: 'arraybuffer' });
+   return response.data;
+
 }
 
 const server = http.createServer(async (req, res) => {
+
+if (req.url === '/health') {
+	
+	try {
+		pongs = await fetchPongs(pongUrl);
+		res.statusCode = 200;
+		res.setHeader('Content-Type', 'text/plain');
+		res.end('Ready');
+		
+	} catch {
+		res.statusCode = 500;
+		res.setHeader('Content-Type', 'text/plain');
+		res.end('no pongs available');
+	}	
+	
+}
+else {
 
 	try {
 	  randomlyGeneratedString = fs.readFileSync(randomStringPath, 'utf8');
@@ -32,14 +46,15 @@ const server = http.createServer(async (req, res) => {
 	  randomlyGeneratedString = '[No random string found]';
 	}
 
-  try {
-	pongs = await fetchPongs(pongUrl);
-  } catch {
-	pongs = '[No pongs count found]';
-  }	
+	try {
+		pongs = await fetchPongs(pongUrl);
+	} catch {
+		pongs = '[No pongs count found]';
+	}	
   
   res.setHeader('Content-Type', 'text/html');
   res.end(`file content: ${information}<br>env variable: MESSAGE=${message}<br>${randomlyGeneratedString}<br>${pongs}`);
+}
 });
 
 server.listen(port, () => {

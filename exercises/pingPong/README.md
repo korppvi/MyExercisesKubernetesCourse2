@@ -20,6 +20,8 @@ kubectl apply -f exercises/pingPong/manifest/deployment.yaml
 	
 kubectl apply -f exercises/pingPong/manifest/service.yaml
 
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
+
 kubectl apply -f exercises/pingPong/gateway/gateway.yaml
 
 kubectl apply -f exercises/pingPong/gateway/route.yaml
