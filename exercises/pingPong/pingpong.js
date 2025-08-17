@@ -15,12 +15,12 @@ const pool = new Pool({
 });
 
 const server = http.createServer(async (req, res) => {
-  res.setHeader('Content-Type', 'text/html');
 	try {
 	  if (req.url === '/pingpong') {
 		  
 		await pool.query("INSERT INTO pongs (pong) VALUES ('pong')");
 		
+		res.setHeader('Content-Type', 'text/plain');
 		res.end('success');
 	  }
 	  else if (req.url === '/count') {
@@ -28,9 +28,11 @@ const server = http.createServer(async (req, res) => {
 		const queryResult = await pool.query('SELECT COUNT(*) AS count FROM pongs');
 		let pongs = queryResult.rows[0].count;   
 		
+		res.setHeader('Content-Type', 'text/plain');
 		res.end(`Ping / Pongs:  ${pongs}`);
 	  }
 	  else {
+		res.setHeader('Content-Type', 'text/html');
 		res.end('<h1>Invalid path</h1>');
 	  }
   } catch (err) {

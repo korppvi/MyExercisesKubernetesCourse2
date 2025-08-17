@@ -19,3 +19,11 @@ kubectl apply -f exercises/pingPong/stateful/service.yaml
 kubectl apply -f exercises/pingPong/manifest/deployment.yaml
 	
 kubectl apply -f exercises/pingPong/manifest/google/service.yaml
+
+kubectl apply -f exercises/pingPong/manifest/ingress.yaml
+
+kubectl apply -f exercises/logOutput/configmaps.yaml
+
+kubectl apply -f exercises/logOutput/manifest/deployment.yaml
+
+kubectl apply -f exercises/logOutput/manifest/google/service.yaml
