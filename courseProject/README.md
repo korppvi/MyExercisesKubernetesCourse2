@@ -2,22 +2,20 @@
 
 Deploy this using: 
 
+gcloud auth login
+
+gcloud services enable container.googleapis.com
+
+gcloud container clusters create some-cluster-exercise --zone=europe-north1-b --cluster-version=1.32 --disk-size=32 --num-nodes=3 --machine-type=e2-micro
+
+gcloud compute ssh <node> --zone europe-north1-b
+
+sudo mkdir -p /tmp/images
+
+sudo chmod 777 /tmp/images
+
+Change node name in persistentVolume.yaml to <node> 
+
 kubectl create namespace project
 
-kubectl apply -f courseProject/todo-backend/configmaps.yaml
-
-kubectl apply -f courseProject/todo-backend/statefulset.yaml
-
-kubectl apply -f courseProject/todo-backend/service.yaml
-
-kubectl apply -f courseProject/todo-backend/manifest
-
-kubectl apply -f courseProject/configmap.yaml
-
-docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/images
-
-kubectl apply -f courseProject/persistentVolume.yaml
-
-kubectl apply -f courseProject/persistentVolumeClaim.yaml
-
-kubectl apply -f courseProject/manifest
+kubectl apply -k .
